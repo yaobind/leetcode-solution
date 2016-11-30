@@ -19,3 +19,38 @@ public class Solution {
         return false;
     }
 }
+
+
+public class Solution {
+    public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
+    /** inorder successor in a binary search tree
+     */
+        if (p == null || root == null) {
+            return null;
+        }
+        
+        TreeNode suc = null;
+        if (p.right != null) {
+            suc = p.right;
+            while (suc.left != null) {
+                suc = suc.left;
+            }
+            return suc;
+        } 
+        
+        //p.right == null, need to search from the root, mimic the search by hand path
+        
+        while (root != null) {
+            if(root.val > p.val){
+                suc = root;
+                root = root.left;
+            } else if(root.val < p.val){
+                root = root.right;
+            } else {
+                break;
+            }
+            
+        }    
+        return suc;
+    }
+}
